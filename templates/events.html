@@ -1,0 +1,115 @@
+<script src="{{url_for('static', filename='test.js')}}"></script>
+<link rel="stylesheet" type="text/css" src="{{url_for('static', filename='csstest.css')}}">
+<head>
+  
+
+</head>
+
+
+
+{% extends "base.html" %}
+{% block title %} Home page {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" src="{{url_for('static', filename='csstest.css')}}">
+<h1> מתאר תקלות</h1>
+
+
+ 
+
+  <form method="POST" action="/addevent">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+      data-whatever="@mdo">פתיחת
+      תקלה</button>
+  
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">פתיחת תקלה</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+  
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">שם טכנאי</label>
+  
+                <input type="text" id="name" name="name" class="form-control" id="recipient-name">
+              </div>
+  
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">תיאור תקלה</label>
+  
+                <textarea class="form-control" id="desc" name="desc" type="text"></textarea>
+              </div>
+
+
+              <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    גורם מטפל
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" id="desc" name="desc" >זירה</a>
+    <a class="dropdown-item" id="desc" name="desc" >מוטורולה</a>
+    <a class="dropdown-item" id="desc" name="desc" >פרטנר</a>
+    <a class="dropdown-item" id="desc" name="desc" >הנדסה</a>
+  </div>
+</div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            
+            <input type="submit">
+            
+          </div>
+          </div>
+          </div>
+          </div>
+          
+<div class="container my-4">
+
+
+ 
+<div class="table-responsive"></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">טכנאי</th>
+        <th scope="col">תאריך</th>
+        <th scope="col">גורם</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for user in myTable%}
+      <tr class="hide-table-padding"></tr>
+      <div id="collapseOne" class="collapse in p-3">
+      <div class="row">
+      <tr class="clickable" data-toggle="collapse" id={{user.id}} data-target=".{{user.id}}">
+        <th><a href="/delete/{{user.id}}" class="btn btn-outline-danger btn-sm">מחיקה</a> <a href="/update/{{user.id}}"
+            class="btn btn-info">עדכון</a> {{user.name}}</th>
+        <td>{{user.date}}</td>
+  
+      </tr>
+      <tr class="collapse {{user.id}}">
+        <td><a href="/updatevent/{{user.id}}" class="btn btn-info">ערוך</a><br>תיאור: <br>{{user.desc}}</td>
+  
+        {% endfor %}
+  
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+

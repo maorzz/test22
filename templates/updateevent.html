@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Home page {% endblock %}
+{% block content %}
+<div class="container">
+ <h1>עדכון תקלות</h1>
+ <br />
+ <form action="/updatevent/{{event_to_update.id}}" method="POST">
+  <input type="text" placeholder="editevent" name="editevent" value="{{event_to_update.desc}}">
+  <input type="submit" value="עדכון" class="btn btn-secondary">
+ </form>
+ </form>
+ <br /><br /><br />
+ {% endblock %}
