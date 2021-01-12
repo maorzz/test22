@@ -1,4 +1,3 @@
-
 from enum import unique
 from flask import Flask, redirect, url_for, render_template, request, session, flash, redirect, url_for
 from datetime import timedelta
@@ -35,6 +34,17 @@ class Table(db.Model):
 @ app.route("/")
 def home():
     return render_template("index.html")
+
+
+@ app.route("/test2", methods=['POST', 'GET'])
+def test2():
+    if request.method == 'POST':
+        my_data = Table.query.get(request.form.get('id'))
+        my_data.name = request.form['name']
+        my_data.desc = request.form['desc']
+        db.session.commit()
+
+        return redirect(url_for('events'))
 
 
 @ app.route("/events")
