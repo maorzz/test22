@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Home page {% endblock %}
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+ integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<table class="table">
+  <div class="container">
+   <h1>מתאר תקלות</h1>
+   <br />
+   <form action="/table" method="POST">
+    <input type="text" placeholder="סוג תקלה" name="event">
+    <input type="submit" value="פתיחת תקלה" class="btn btn-secondary">
+   </form>
+   <br /><br /><br /> 
+  </div>
+
+
+  <table class="table">
+   <thead>
+    <tr>
+     <th scope="col">סוג</th>
+     <th scope="col">שעת פתיחה</th>
+     <th scope="col">תיאור תקלה</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     {%for event in events %}
+
+     <td><button class="btn btn-default">
+      <a href="/update/{{event.id}}" class="btn btn-primary btn-sm ">עדכון</a>
+    </button>
+      {{event.name}}</td>
+     <td>{{event.date_created}}
+     </td>
+
+    </tr>
+     {% endfor %}
+
+
+ </table>
+{% endblock %}
+
+
+
+
+
